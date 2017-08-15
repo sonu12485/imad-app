@@ -23,7 +23,7 @@ var article_three={
 
 function createTemplate(data){
  var title=data.title;
- var heading=data.haeding;
+ var heading=data.heading;
  var content=data.content;
  var HTMLtemplate=`<!doctype html>
 <html>
