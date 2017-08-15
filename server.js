@@ -5,6 +5,70 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var article_one={
+ title: 'Article-one',
+ heading:'This is my first article',
+ content:'content of article 1'
+};
+var article_two={
+ title: 'Article-two',
+ heading:'This is my second article',
+ content:'content of article 2'
+};
+var article_three={
+ title: 'Article-three',
+ heading:'This is my third article',
+ content:'content of article 3'
+};
+
+function createTemplate(data){
+ var title=data.title;
+ var heading=data.haeding;
+ var content=data.content;
+ var HTMLtemplate=`<!doctype html>
+<html>
+    <head>
+        <title>
+            ${title}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="/ui/style.css" rel="stylesheet" />
+    </head>
+    
+    <body>
+        <div class="container">
+        <div>
+            <a href='/' >HOME</a>
+            <hr>
+        </div>
+        <div>
+            <h2>
+                ${heading}
+            </h2>
+            <br>
+            <br>
+            <p>
+                ${content}<br>
+                ........<br>
+                ........<br>
+            </p>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div>
+            <p>
+                &copy;K.SAI KISAHN
+            </p>
+        </div>
+        </div>
+    </body>
+</html>
+ `;
+ return HTMLtemplate;
+}
+
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -18,15 +82,15 @@ app.get('/ui/madi.png', function (req, res) {
 });
 
 app.get('/article-one', function(req, res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+    res.send(createTemplate(article_one));
 });
 
 app.get('/article-two', function(req, res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
+    res.send(createTemplate(article_two));
 });
 
 app.get('/article-three', function(req, res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
+    res.send(createTemplate(article_three));
 });
 
 // Do not change port, otherwise your app won't run on IMAD servers
