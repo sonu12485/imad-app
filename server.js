@@ -1,7 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-
+/*
 //load node-postgres for database
 var Pool=require('pg').Pool;
 //config the database
@@ -23,7 +23,7 @@ app.get('/test-db',function(req,res){
      }
    });
 });
-
+*/
 
 var app = express();
 app.use(morgan('combined'));
