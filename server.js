@@ -16,23 +16,7 @@ var config={
 var app = express();
 app.use(morgan('combined'));
 
-var articles={
-    'article-one':{
- title: 'Article-one',
- heading:'This is my first article',
- content:'content of article 1'
-},
-    'article-two':{
- title: 'Article-two',
- heading:'This is my second article',
- content:'content of article 2'
-},
-    'article-three':{
- title: 'Article-three',
- heading:'This is my third article',
- content:'content of article 3'
-}
-};
+
 function createTemplate(data){
  var title=data.title;
  var heading=data.heading;
