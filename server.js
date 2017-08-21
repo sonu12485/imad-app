@@ -85,6 +85,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+
+//database
+
 var pool=new Pool (config);
 app.get('/test-db',function(req,res){
    pool.query('SELECT *FROM test',function(err,result){
@@ -125,9 +128,22 @@ app.get('/submit-name',function(req,res){
 
 
 
-app.get('/:articleName', function(req, res){
+app.get('/articles/:articleName', function(req, res){
+    
     var articleName=req.params.articleName;
-    res.send(createTemplate(articles[articleName]));
+    pool.query("SELECT * FROM article WHERE title='"+articleName+"'", function(err,result) {
+       if(err){
+           res.status(500)send(err.toString());
+       } else{
+           if(result.rows.length === 0){
+               res.status(404)send('article not found');
+           }else{
+               var articleData = result.rows[0];
+                res.send(createTemplate(articleData));
+           }
+       }
+    });
+    
 });
 
 
