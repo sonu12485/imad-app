@@ -11,9 +11,6 @@ var crypto=require('crypto');
 //body parser
 var bodyParser=require('body-parser');
 
-//tell express to convert json input to req.body
-app.use(bodyParser.json());
-
 
 //config the database
 var config={
@@ -27,6 +24,8 @@ var config={
 var app = express();
 app.use(morgan('combined'));
 
+//tell express to convert json input to req.body
+app.use(bodyParser.json());
 
 function createTemplate(data){
  var title=data.title;
