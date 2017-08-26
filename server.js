@@ -156,6 +156,12 @@ app.get('/check-login',function(req,res){
    }
 });
 
+//to logout
+app.get('/logout',function(req,res){
+   delete req.session.auth;
+   res.send('logged out');
+});
+
 
 //database
 
