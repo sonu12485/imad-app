@@ -70,7 +70,7 @@ submit.onclick=function(){
 
 //this id to login with username and password
 
-var submit=document.getElementById('submit-btn');
+var submit=document.getElementById('submit');
 submit.onclick=function(){
   var request=new XMLHttpRequest();
   request.onreadystatechange=function(){
