@@ -9,7 +9,7 @@ var Pool=require('pg').Pool;
 var crypto=require('crypto');
 
 //body parser
-var bodyParser=require('body-parser');
+var bodyParser=require('body-parse');
 
 
 //config the database
