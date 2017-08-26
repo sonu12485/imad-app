@@ -11,6 +11,8 @@ var crypto=require('crypto');
 //body parser
 var bodyParser=require('body-parser');
 
+//session library
+var session=require('express-session');
 
 //config the database
 var config={
@@ -26,6 +28,12 @@ app.use(morgan('combined'));
 
 //tell express to convert json input to req.body
 app.use(bodyParser.json());
+
+//config th session library
+app.use(session({
+    secret:'some-random-value',
+    cookie:{maxAge : 1000*60*60*24*30}
+}));
 
 function createTemplate(data){
  var title=data.title;
@@ -126,6 +134,10 @@ app.post('/login',function(req,res){
           var salt=dbString.split('$')[2];
           var hashedPassword=hash(password,salt);
           if(hashedPassword === dbString){
+              
+              //set session
+              req.session.auth={userId : result.rows[0].id};
+              
               res.send('login succesfully as :'+username);
           }else{
               res.status(403).send('invalid username/password');
@@ -133,6 +145,15 @@ app.post('/login',function(req,res){
          }
      }
    });
+});
+
+//to check login 
+app.get('/check-login',function(req,res){
+   if(req.session && req.session.auth && req.session.auth.userId){
+       res.send('you are logged in as : '+req.session.auth.userId.toString());
+   } else{
+       res.send('you are not logged in');
+   }
 });
 
 
