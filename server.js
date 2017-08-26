@@ -9,10 +9,6 @@ var Pool=require('pg').Pool;
 var crypto=require('crypto');
 
 //body parser
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-
 var bodyParser=require('body-parser');
 
 
